@@ -1,16 +1,10 @@
 [package]
-name = "mysql-orm"
+name = "ActiveRecord"
 version = "0.1.0"
 authors = ["lisq <mail@lishunqi.com>"]
 edition = "2018"
 
 [dependencies]
-proc-macro-lib={path="../proc-macro-lib/"}
 serde="*"
 serde_derive="*"
 serde_json = "1.0.39"
-
-mysql = "16.0.2"
-
-r2d2_mysql = "16.0.0"
-r2d2="*"
