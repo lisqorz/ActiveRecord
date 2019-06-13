@@ -1,25 +1,31 @@
 use std::error::Error;
-use std::io::ErrorKind;
-use crate::querybuild::QueryBuildTrait;
+use crate::query_builder::QueryBuilderTrait;
+use super::ARResult;
 // todo 考虑把trait和struct合并一起用
 pub trait ActiveRecordTrait {
     fn find() -> ActiveRecord {
         ActiveRecord {}
     }
+    fn find_by_sql(){}
+
+
     fn find_one() {}
     fn update_all() {}
     fn update_all_counter() {}
     fn delete_all() {}
-    fn is_new_record() -> bool {true}
+    fn is_new_record() -> bool { true }
 }
 
 pub struct ActiveRecord {}
 
-type ARResult<T> = Result<T, ErrorKind>;
 
-impl QueryBuildTrait for ActiveRecord{}
+impl QueryBuilderTrait for ActiveRecord {}
 
 impl ActiveRecord {
+    fn find_by_condition(condition: String) {
+        let primary_key = "id";
+
+    }
 
     pub fn one(&mut self) -> ARResult<i32> {
         Ok(1)
