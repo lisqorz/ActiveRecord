@@ -4,11 +4,18 @@ use std::fmt::Formatter;
 use std::fmt::Error;
 
 pub trait QueryBuilderTrait {
-    fn alias(&mut self, name: &AsRef<str>) {}
-    fn left_join(&mut self) {}
-    fn right_join(&mut self) {}
-
-    fn inner_join(&mut self) {}
+    fn alias(&mut self, name: &AsRef<str>) -> &mut Self {
+        self
+    }
+    fn left_join(&mut self) -> &mut Self {
+        self
+    }
+    fn right_join(&mut self) -> &mut Self {
+        self
+    }
+    fn inner_join(&mut self) -> &mut Self {
+        self
+    }
     fn r#where(&mut self) -> &mut Self {
         self
     }
