@@ -9,6 +9,42 @@ use crate::command::Command;
 
 // todo 考虑把trait和struct合并一起用
 pub trait ActiveRecordTrait {
+
+}
+
+pub struct ActiveRecord {}
+
+
+impl QueryBuilderTrait for ActiveRecord {}
+
+impl ActiveRecord {
+    fn alias(&mut self, name: &AsRef<str>) -> &mut Self {
+        self
+    }
+    fn left_join(&mut self) -> &mut Self {
+        self
+    }
+    fn right_join(&mut self) -> &mut Self {
+        self
+    }
+    fn inner_join(&mut self) -> &mut Self {
+        self
+    }
+    fn r#where(&mut self) -> &mut Self {
+        self
+    }
+    fn and_where(&mut self) -> &mut Self { self }
+
+    fn filter_where(&mut self) -> &mut Self {
+        self
+    }
+    fn and_filter_where(&mut self) -> &mut Self { self }
+
+    fn select(&mut self) -> &mut Self { self }
+
+    fn group_by(&mut self) -> &mut Self { self }
+
+    fn limit(&mut self) -> &mut Self { self }
     fn find() -> ActiveRecord {
         ActiveRecord {}
     }
@@ -20,14 +56,6 @@ pub trait ActiveRecordTrait {
     fn update_all_counter() {}
     fn delete_all() {}
     fn is_new_record() -> bool { true }
-}
-
-pub struct ActiveRecord {}
-
-
-impl QueryBuilderTrait for ActiveRecord {}
-
-impl ActiveRecord {
     fn find_by_condition(condition: String) {
         let primary_key = "id";
     }

@@ -4,10 +4,12 @@
 name = "ActiveRecord"
 version = "0.1.0"
 dependencies = [
+ "quote 0.6.12 (registry+https://mirrors.ustc.edu.cn/crates.io-index/)",
  "r2d2_mysql 16.0.0 (registry+https://mirrors.ustc.edu.cn/crates.io-index/)",
  "serde 1.0.91 (registry+https://mirrors.ustc.edu.cn/crates.io-index/)",
  "serde_derive 1.0.91 (registry+https://mirrors.ustc.edu.cn/crates.io-index/)",
  "serde_json 1.0.39 (registry+https://mirrors.ustc.edu.cn/crates.io-index/)",
+ "syn 0.15.34 (registry+https://mirrors.ustc.edu.cn/crates.io-index/)",
 ]
 
 [[package]]

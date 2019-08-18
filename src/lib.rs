@@ -1,9 +1,19 @@
-mod active_record;
+#![recursion_limit = "256"]
+extern crate proc_macro;
+#[macro_use]
+extern crate syn;
+#[macro_use]
+extern crate quote;
+use proc_macro::TokenStream;
+use syn::parse_macro_input;
+use syn::DeriveInput;
+
 mod active_query;
-mod query_builder;
-mod query;
+mod active_record;
 mod command;
 mod mysql;
+mod query;
+mod query_builder;
 
 extern crate r2d2_mysql;
 
@@ -11,37 +21,24 @@ use std::io::ErrorKind;
 
 type ARResult<T> = Result<T, ErrorKind>;
 
-#[cfg(test)]
-mod tests {
-    use crate::query_builder::QueryBuilderTrait;
-    use std::sync::Arc;
-    use std::thread::Builder;
 
-    extern crate r2d2_mysql as r2d2;
-
-    #[test]
-    fn scalar() {
-        use crate::active_record::ActiveRecordTrait;
-        use r2d2_mysql::mysql::OptsBuilder;
-        struct User {
-            id: i32
-        }
-        {
-            impl ActiveRecordTrait for User {}
-        }
-        let db_url = "mysql://root:@localhost:3306/sys";
-        let builder = OptsBuilder::from_opts(db_url);
-        let manager = r2d2_mysql::MysqlConnectionManager::new(builder);
-        let b = r2d2_mysql::r2d2::Pool::new(manager);
-        let pool = Arc::new(b.unwrap());
-        let conn = pool.clone().get().unwrap();
-
-        let a = User::find().r#where().and_where().and_filter_where().and_where().one(&conn).and_then(|x| {});
-        let a = User::find().r#where().and_where().filter_where().all(&conn).for_each(|x| {});
+trait F{
+    fn a(){
+        println!("hello world");
     }
+}
 
-    #[test]
-    fn query_scalar() {
-        use crate::command::Command;
-    }
+#[proc_macro_derive(ActiveRecord)]
+pub fn active_record(input: TokenStream) -> TokenStream {
+    let ast: syn::DeriveInput = syn::parse(input).unwrap();
+    let name = &ast.ident;
+    let expanded = quote! {
+        impl  #name {
+            fn a() -> Option<i32> {
+                println!("hello world");
+                Some(1)
+            }
+        }
+    };
+    TokenStream::from(expanded)
 }
